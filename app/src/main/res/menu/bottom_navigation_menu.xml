@@ -3,20 +3,20 @@
 
     <item
         android:id="@+id/bottombar_home"
-        android:title="Home"
-        android:icon="@drawable/ic_baseline_home_24"/>
+        android:title="History"
+        android:icon="@drawable/history"/>
     <item
         android:id="@+id/bottombar_orders"
-        android:title="Orders"
-        android:icon="@drawable/ic_baseline_reorder_24"/>
+        android:title="Availaible job"
+        android:icon="@drawable/job"/>
     <item
         android:id="@+id/bottombar_products"
-        android:title="Products"
-        android:icon="@drawable/ic_baseline_notifications_24"/>
+        android:title="Profile"
+        android:icon="@drawable/ic_baseline_account_box_24"/>
     <item
         android:id="@+id/bottombar_categories"
-        android:title="Categories"
-        android:icon="@drawable/ic_baseline_category_24"/>
+        android:title="Current Transaction"
+        android:icon="@drawable/rupees"/>
     <item
         android:id="@+id/bottombar_account"
         android:title="Account"

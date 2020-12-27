@@ -91,15 +91,15 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:hint="D/O/B"
+                android:hint="DD/MM/YY"
                 android:textColorHint="@color/grey">
             </EditText>
 
             <ImageView
                 android:id="@+id/calendr"
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="match_parent"
-                android:src="@android:drawable/ic_menu_my_calendar"
+                android:src="@drawable/calender2"
                 >
 
             </ImageView>

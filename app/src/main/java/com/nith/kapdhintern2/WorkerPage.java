@@ -25,9 +25,9 @@ public class WorkerPage extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.worker_bottom_navigation);
 
         //set home as selected
-        bottomNavigationView.setSelectedItemId(R.id.bottombar_home);
+        bottomNavigationView.setSelectedItemId(R.id.bottombar_products);
         getSupportFragmentManager().beginTransaction().replace(R.id.worker_fragment_container,
-                new WorkerHomeFragment()).commit();
+                new WorkerNotificationFragment()).commit();
 
         //set on item selected
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -53,7 +53,7 @@ public class WorkerPage extends AppCompatActivity {
                         break;
 
                     case R.id.bottombar_account:
-                        selectedFragment = new WorkerCategoryFragment();
+                        selectedFragment = new WorkerAccountFragment();
                         break;
 
                 }

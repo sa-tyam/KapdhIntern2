@@ -38,6 +38,8 @@ public class CustomerRegVerification extends AppCompatActivity {
     EditText phoneOtp;
     TextView resendOtp;
     Boolean otpvalid = true;
+    Boolean isPhoneVerifed = false;
+    Boolean emailflag = false;
     String verificationid;
     FirebaseAuth auth;
     FirebaseUser user;
@@ -71,6 +73,35 @@ public class CustomerRegVerification extends AppCompatActivity {
         db = FirebaseDatabase.getInstance();
         user = auth.getCurrentUser();
 
+        mcallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            @Override
+            public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                super.onCodeSent(s, forceResendingToken);
+                verificationid = s;
+                token = forceResendingToken;
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCodeAutoRetrievalTimeOut(@NonNull String s) {
+                super.onCodeAutoRetrievalTimeOut(s);
+            }
+
+            @Override
+            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                verifyAuthCredential(phoneAuthCredential);
+                Toast.makeText(getApplicationContext(),"called",Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onVerificationFailed(@NonNull FirebaseException e) {
+                Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+
+            }
+        };
+
         user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -83,33 +114,6 @@ public class CustomerRegVerification extends AppCompatActivity {
             }
         });
 
-        mcallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-            @Override
-            public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                super.onCodeSent(s, forceResendingToken);
-                verificationid = s;
-                token = forceResendingToken;
-
-            }
-
-            @Override
-            public void onCodeAutoRetrievalTimeOut(@NonNull String s) {
-                super.onCodeAutoRetrievalTimeOut(s);
-            }
-
-            @Override
-            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                verifyAuthCredential(phoneAuthCredential);
-
-            }
-
-            @Override
-            public void onVerificationFailed(@NonNull FirebaseException e) {
-                Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
-
-            }
-        };
         sendOtp(phone);
 
         done.setOnClickListener(new View.OnClickListener() {
@@ -117,35 +121,8 @@ public class CustomerRegVerification extends AppCompatActivity {
             public void onClick(View view) {
                 user.reload();
                 user = auth.getCurrentUser();
-                Boolean emailflag = user.isEmailVerified();
-                if(emailflag)
-                {
-                    t1.setVisibility(View.VISIBLE);
-                    iv1.setVisibility(View.VISIBLE);
-                    t1.setText("Verified");
-                    iv1.setImageResource(R.drawable.tick);
-                    Toast.makeText(getApplicationContext(),"Email Verified",Toast.LENGTH_SHORT).show();
-
-                    validateotp(phoneOtp.getText().toString());
-
-                    if(otpvalid)
-                    {
-                        String otp = phoneOtp.getText().toString().trim();
-
-                        PhoneAuthCredential credential =  PhoneAuthProvider.getCredential(verificationid,otp);
-                        verifyAuthCredential(credential);
-                    }
-                }
-                else
-                    {
-                        t1.setVisibility(View.VISIBLE);
-                        iv1.setVisibility(View.VISIBLE);
-                        t1.setText("Not Verified");
-                        iv1.setImageResource(R.drawable.cross);
-                        Toast.makeText(getApplicationContext(),"Email Not Verified",Toast.LENGTH_SHORT).show();
-                    }
-
-
+                emailflag = user.isEmailVerified();
+                isAllOk(emailflag,isPhoneVerifed);
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +131,56 @@ public class CustomerRegVerification extends AppCompatActivity {
                 startActivity(new Intent(CustomerRegVerification.this,MainActivity.class));
             }
         });
+    }
+
+    private void isAllOk(Boolean emailflag, Boolean isPhoneVerifed)
+    {
+        if(emailflag && isPhoneVerifed)
+        {
+            t1.setVisibility(View.VISIBLE);
+            iv1.setVisibility(View.VISIBLE);
+            t1.setText("Verified");
+            iv1.setImageResource(R.drawable.tick);
+            Toast.makeText(getApplicationContext(),"Email Verified",Toast.LENGTH_SHORT).show();
+            ref = db.getReference(user.getUid()).child("Customer").child("Info");
+            ref.child("Email").setValue(email);
+            ref.child("Phone").setValue(phone);
+            ref.child("Aadhar").setValue(aadhar);
+            ref.child("Name").setValue(name);
+            ref.child("PinCode").setValue(pin);
+            ref.child("DOB").setValue(dob);
+            ref.child("State").setValue(state);
+            ref.child("District").setValue(district);
+            ref.child("City").setValue(city);
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        }
+        else if(emailflag && !(isPhoneVerifed))
+        {
+            t1.setVisibility(View.VISIBLE);
+            iv1.setVisibility(View.VISIBLE);
+            t1.setText("Verified");
+            iv1.setImageResource(R.drawable.tick);
+            Toast.makeText(getApplicationContext(),"Email Verified",Toast.LENGTH_SHORT).show();
+
+            validateotp(phoneOtp.getText().toString());
+
+            if(otpvalid)
+            {
+                String otp = phoneOtp.getText().toString().trim();
+
+                PhoneAuthCredential credential =  PhoneAuthProvider.getCredential(verificationid,otp);
+                verifyAuthCredential(credential);
+            }
+        }
+        else
+        {
+            t1.setVisibility(View.VISIBLE);
+            iv1.setVisibility(View.VISIBLE);
+            t1.setText("Not Verified");
+            iv1.setImageResource(R.drawable.cross);
+            Toast.makeText(getApplicationContext(),"Email Not Verified",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
@@ -184,28 +211,45 @@ public class CustomerRegVerification extends AppCompatActivity {
         auth.getCurrentUser().linkWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                Toast.makeText(getApplicationContext(),"Linked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Verified and Linked",Toast.LENGTH_SHORT).show();
                 iv2.setVisibility(View.VISIBLE);
                 iv2.setImageResource(R.drawable.tick);
-                ref = db.getReference(user.getUid()).child("Customer").child("Info");
-                ref.child("Email").setValue(email);
-                ref.child("Phone").setValue(phone);
-                ref.child("Aadhar").setValue(aadhar);
-                ref.child("Name").setValue(name);
-                ref.child("PinCode").setValue(pin);
-                ref.child("DOB").setValue(dob);
-                ref.child("State").setValue(state);
-                ref.child("District").setValue(district);
-                ref.child("City").setValue(city);
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                isPhoneVerifed = true;
+                user.reload();
+                user = auth.getCurrentUser();
+                emailflag = user.isEmailVerified();
+                isAllOk(emailflag,isPhoneVerifed);
+//                if(user.isEmailVerified())
+//                {
+//                    ref = db.getReference(user.getUid()).child("Customer").child("Info");
+//                    ref.child("Email").setValue(email);
+//                    ref.child("Phone").setValue(phone);
+//                    ref.child("Aadhar").setValue(aadhar);
+//                    ref.child("Name").setValue(name);
+//                    ref.child("PinCode").setValue(pin);
+//                    ref.child("DOB").setValue(dob);
+//                    ref.child("State").setValue(state);
+//                    ref.child("District").setValue(district);
+//                    ref.child("City").setValue(city);
+//                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+//                }
+//                else
+//                    {
+//                        t1.setVisibility(View.VISIBLE);
+//                        iv1.setVisibility(View.VISIBLE);
+//                        t1.setText("Not Verified");
+//                        iv1.setImageResource(R.drawable.cross);
+//                        Toast.makeText(getApplicationContext(),"Email Not Verified",Toast.LENGTH_SHORT).show();
+//                    }
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(),"Invalid Otp",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
                 iv2.setVisibility(View.VISIBLE);
                 iv2.setImageResource(R.drawable.cross);
-                phoneOtp.setError("Invalid Otp");
+                phoneOtp.setError(e.getMessage());
             }
         });
 

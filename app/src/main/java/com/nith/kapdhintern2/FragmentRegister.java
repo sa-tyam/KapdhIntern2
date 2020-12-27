@@ -1,5 +1,6 @@
 package com.nith.kapdhintern2;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,12 +28,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 
 public class FragmentRegister extends Fragment {
 
     Button go;
     EditText name,email,pass,dob,state,nation,mobile,aadhar,pin,city,distrct,repass;
     FirebaseAuth auth;
+    ImageView iv;
+    final Calendar myCalendar = Calendar.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -48,8 +57,19 @@ public class FragmentRegister extends Fragment {
          pin = (EditText) v.findViewById(R.id.reg_pincode);
          city = (EditText) v.findViewById(R.id.reg_city);
          distrct = (EditText) v.findViewById(R.id.reg_district);
+         iv = (ImageView) v.findViewById(R.id.calendr);
 
          auth = FirebaseAuth.getInstance();
+
+         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+             @Override
+             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                 myCalendar.set(Calendar.YEAR,year);
+                 myCalendar.set(Calendar.MONTH,month);
+                 myCalendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                 updateLabel();
+             }
+         };
 
          go.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -191,7 +211,20 @@ public class FragmentRegister extends Fragment {
                  });
              }
          });
+         iv.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 new DatePickerDialog(getActivity(), date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+             }
+         });
 
          return v;
+    }
+
+    private void updateLabel() {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        dob.setText(sdf.format(myCalendar.getTime()));
     }
 }

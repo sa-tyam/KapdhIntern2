@@ -73,7 +73,7 @@ public class FragmentLogin extends Fragment {
                                        @Override
                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                           if(snapshot.exists())
+                                           if(snapshot.exists() & auth.getCurrentUser().isEmailVerified())
                                            {
 
                                                if(snapshot.hasChild("Customer"))

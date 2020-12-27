@@ -9,7 +9,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="worker notification fragment"
-        android:textSize="40sp" />
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="Profile Fragment"
+        android:textSize="32sp" />
 
 </FrameLayout>
