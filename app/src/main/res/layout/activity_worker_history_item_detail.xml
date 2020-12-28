@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WorkerHistoryItemDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/workerHistoryItemDetailHeaderBackgroundColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/orderDetailHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/worker_history_header"
+            android:textColor="@color/workerHistoryItemDetailHeaderTextColor"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/orderDetailsHeaderBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="backButtonPressed"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            app:tint="@color/workerHistoryItemDetailHeaderTextColor" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailOrderIdHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/workerHistoryItemDetailOrderIdHint"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailOrderIdTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="15dp"
+                        android:text="#2345"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/workerHistoryItemDetailOrderIdHint"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailOrderTimeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="10/09/2020 08:10 AM"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailOrderIdHint" />
+
+                    <View
+                        android:id="@+id/workerHistoryItemDetailFirstHorizontalLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@android:color/darker_gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailOrderTimeTextView" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailTotalDaysTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="30dp"
+                        android:text="2 days"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailFirstHorizontalLine" />
+
+
+                    <View
+                        android:id="@+id/workerHistoryItemDetailSecondHorizontalLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@android:color/darker_gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailTotalDaysTextView" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailTotalCostHintTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/workerHistoryItemDetailPriceHint"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailSecondHorizontalLine" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailTotalCostTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="15dp"
+                        android:text="$30"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailSecondHorizontalLine" />
+
+
+                    <View
+                        android:id="@+id/workerHistoryItemDetailthirdHorizontalLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@android:color/darker_gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailTotalCostHintTextView" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerDetailHeaderTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/workerHistoryItemDetailCustomerDetailHeader"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailthirdHorizontalLine" />
+
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerNameHintTextView"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/workerHistoryItemDetailCustomerNameHint"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailCustomerDetailHeaderTextView" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerNameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="15dp"
+                        android:singleLine="true"
+                        android:text="Satyam"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/workerHistoryItemDetailCustomerNameHintTextView"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailCustomerDetailHeaderTextView" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerMobileHintTextView"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/workerHistoryItemDetailCustomerMobileHint"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailCustomerNameHintTextView" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerMobileTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:singleLine="true"
+                        android:text="+9473115791"
+                        android:textStyle="normal"
+                        android:autoLink="phone"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/workerHistoryItemDetailCustomerMobileHintTextView"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailCustomerNameHintTextView" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerAddressHintTextView"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/workerHistoryItemDetailCustomerAddressHint"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailCustomerMobileHintTextView" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerAddressTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15sp"
+                        android:text="abc colony, abc city , etc"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/workerHistoryItemDetailCustomerAddressHintTextView"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailCustomerMobileHintTextView" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerPinCodeHintTextView"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/workerHistoryItemDetailCustomerPincodeHint"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailCustomerAddressTextView" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerPinCodeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:singleLine="true"
+                        android:text="854301"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/workerHistoryItemDetailCustomerPinCodeHintTextView"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailCustomerAddressTextView" />
+
+
+                    <View
+                        android:id="@+id/workerHistoryItemDetailfourthHorizontalLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@android:color/darker_gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailCustomerPinCodeHintTextView" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerRatingHintTextView"
+                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="20dp"
+                        android:singleLine="true"
+                        android:text="@string/workerHistoryItemDetailCustomerRatingHint"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailfourthHorizontalLine" />
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerRatingTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="15dp"
+                        android:singleLine="true"
+                        android:text="4/5"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/workerHistoryItemDetailCustomerRatingHintTextView"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailfourthHorizontalLine" />
+
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerReviewHintTextView"
+                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="@string/workerHistoryItemDetailCustomerReviewHint"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailCustomerRatingHintTextView" />
+                    <TextView
+                        android:id="@+id/workerHistoryItemDetailCustomerReviewTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:singleLine="true"
+                        android:text="bla bla la bla"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/workerHistoryItemDetailCustomerReviewHintTextView"
+                        app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDetailCustomerRatingHintTextView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

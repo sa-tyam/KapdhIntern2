@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WorkerOrdersFragment">
+    tools:context=".WorkerCurrentTransactionsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:textColor="@color/black"
-        android:text="Available jobs"
+        android:text="Current Transaction Fragment"
         android:textSize="32sp" />
 
 </FrameLayout>
