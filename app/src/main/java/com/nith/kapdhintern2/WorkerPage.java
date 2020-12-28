@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -25,9 +24,9 @@ public class WorkerPage extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.worker_bottom_navigation);
 
         //set home as selected
-        bottomNavigationView.setSelectedItemId(R.id.bottombar_products);
+        bottomNavigationView.setSelectedItemId(R.id.bottombar_profile);
         getSupportFragmentManager().beginTransaction().replace(R.id.worker_fragment_container,
-                new WorkerNotificationFragment()).commit();
+                new WorkerProfileFragment()).commit();
 
         //set on item selected
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -36,20 +35,20 @@ public class WorkerPage extends AppCompatActivity {
 
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
-                    case R.id.bottombar_home:
-                        selectedFragment = new WorkerHomeFragment();
+                    case R.id.bottombar_history:
+                        selectedFragment = new WorkerHistoryFragment();
                         break;
 
-                    case R.id.bottombar_orders:
-                        selectedFragment = new WorkerOrdersFragment();
+                    case R.id.bottombar_available_jobs:
+                        selectedFragment = new WorkerAvailableJobsFragment();
                         break;
 
-                    case R.id.bottombar_products:
-                        selectedFragment = new WorkerNotificationFragment();
+                    case R.id.bottombar_profile:
+                        selectedFragment = new WorkerProfileFragment();
                         break;
 
-                    case R.id.bottombar_categories:
-                        selectedFragment = new WorkerCategoryFragment();
+                    case R.id.bottombar_current_transactions:
+                        selectedFragment = new WorkerCurrentTransactionsFragment();
                         break;
 
                     case R.id.bottombar_account:

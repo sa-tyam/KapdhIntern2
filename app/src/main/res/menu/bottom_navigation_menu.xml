@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/bottombar_home"
+        android:id="@+id/bottombar_history"
         android:title="History"
-        android:icon="@drawable/history"/>
+        android:icon="@drawable/ic_baseline_history_24"/>
     <item
-        android:id="@+id/bottombar_orders"
+        android:id="@+id/bottombar_available_jobs"
         android:title="Availaible job"
-        android:icon="@drawable/job"/>
+        android:icon="@drawable/ic_baseline_add_box_24"/>
     <item
-        android:id="@+id/bottombar_products"
+        android:id="@+id/bottombar_profile"
         android:title="Profile"
         android:icon="@drawable/ic_baseline_account_box_24"/>
     <item
-        android:id="@+id/bottombar_categories"
+        android:id="@+id/bottombar_current_transactions"
         android:title="Current Transaction"
-        android:icon="@drawable/rupees"/>
+        android:icon="@drawable/ic_baseline_attach_money_24"/>
     <item
         android:id="@+id/bottombar_account"
         android:title="Account"
