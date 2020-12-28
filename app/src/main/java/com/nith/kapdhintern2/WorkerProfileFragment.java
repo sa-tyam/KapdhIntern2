@@ -1,29 +1,24 @@
 package com.nith.kapdhintern2;
 
 import android.app.ProgressDialog;
-import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class WorkerNotificationFragment extends Fragment {
+public class WorkerProfileFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,7 +35,7 @@ public class WorkerNotificationFragment extends Fragment {
     DatabaseReference ref;
     ProgressDialog pd;
 
-    public WorkerNotificationFragment() {
+    public WorkerProfileFragment() {
         // Required empty public constructor
     }
 
@@ -53,8 +48,8 @@ public class WorkerNotificationFragment extends Fragment {
      * @return A new instance of fragment WorkerNotificationFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WorkerNotificationFragment newInstance(String param1, String param2) {
-        WorkerNotificationFragment fragment = new WorkerNotificationFragment();
+    public static WorkerProfileFragment newInstance(String param1, String param2) {
+        WorkerProfileFragment fragment = new WorkerProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -74,7 +69,7 @@ public class WorkerNotificationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.fragment_worker_notification, container, false);
+        v = inflater.inflate(R.layout.fragment_worker_profile, container, false);
 
         name = (TextView) v.findViewById(R.id.wrkrname);
         email = (TextView) v.findViewById(R.id.wrkrkemail);
