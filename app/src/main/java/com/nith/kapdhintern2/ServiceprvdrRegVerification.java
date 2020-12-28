@@ -198,7 +198,7 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
             }
             else
                 {
-                    ref = db.getReference(user.getUid()).child("Service Provider").child("Info");
+                    ref = db.getReference(user.getUid()).child("Service Provider").child("Profile");
                     ref.child("Email").setValue(email);
                     ref.child("Phone").setValue(phone);
                     ref.child("Aadhar").setValue(aadhar);
@@ -292,7 +292,7 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
                     Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
                     while(!uri.isComplete());
                     Uri url = uri.getResult();
-                    DatabaseReference reference = db.getReference(user.getUid()).child("Service Provider").child("Info");
+                    DatabaseReference reference = db.getReference(user.getUid()).child("Service Provider").child("Profile");
                     reference.child("Doc1").setValue(url.toString());
                     pd.dismiss();
                 }
@@ -318,7 +318,7 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
                     Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
                     while(!uri.isComplete());
                     Uri url = uri.getResult();
-                    DatabaseReference reference = db.getReference(user.getUid()).child("Service Provider").child("Info");
+                    DatabaseReference reference = db.getReference(user.getUid()).child("Service Provider").child("Profile");
                     reference.child("Doc2").setValue(url.toString());
                     pd.dismiss();
                 }
@@ -344,7 +344,7 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
                     Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
                     while(!uri.isComplete());
                     Uri url = uri.getResult();
-                    DatabaseReference reference = db.getReference(user.getUid()).child("Service Provider").child("Info");
+                    DatabaseReference reference = db.getReference(user.getUid()).child("Service Provider").child("Profile");
                     reference.child("Doc3").setValue(url.toString());
                     pd.dismiss();
                 }

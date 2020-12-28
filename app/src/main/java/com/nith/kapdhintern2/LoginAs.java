@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LoginAs extends AppCompatActivity {
 
     Button b1,b2;
+    FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,5 +31,12 @@ public class LoginAs extends AppCompatActivity {
                 startActivity(new Intent(LoginAs.this,WorkerPage.class));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        auth = FirebaseAuth.getInstance();
+        auth.signOut();
     }
 }

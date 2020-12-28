@@ -142,7 +142,7 @@ public class CustomerRegVerification extends AppCompatActivity {
             t1.setText("Verified");
             iv1.setImageResource(R.drawable.tick);
             Toast.makeText(getApplicationContext(),"Email Verified",Toast.LENGTH_SHORT).show();
-            ref = db.getReference(user.getUid()).child("Customer").child("Info");
+            ref = db.getReference(user.getUid()).child("Customer").child("Profile");
             ref.child("Email").setValue(email);
             ref.child("Phone").setValue(phone);
             ref.child("Aadhar").setValue(aadhar);

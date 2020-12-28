@@ -1,18 +1,28 @@
 package com.nith.kapdhintern2;
 
+import android.app.ProgressDialog;
+import android.nfc.Tag;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link WorkerNotificationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class WorkerNotificationFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -23,6 +33,12 @@ public class WorkerNotificationFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    View v;
+    TextView name,email,dob,aadhar,mobile,pincode,state,district,city;
+    FirebaseAuth auth;
+    FirebaseDatabase db;
+    DatabaseReference ref;
+    ProgressDialog pd;
 
     public WorkerNotificationFragment() {
         // Required empty public constructor
@@ -58,7 +74,45 @@ public class WorkerNotificationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_worker_notification, container, false);
+        v = inflater.inflate(R.layout.fragment_worker_notification, container, false);
+
+        name = (TextView) v.findViewById(R.id.wrkrname);
+        email = (TextView) v.findViewById(R.id.wrkrkemail);
+        mobile = (TextView) v.findViewById(R.id.wrkrmobile);
+        aadhar = (TextView) v.findViewById(R.id.wrkraadhar);
+        dob = (TextView) v.findViewById(R.id.wrkrdob);
+        pincode = (TextView) v.findViewById(R.id.wrkrpincode);
+        state= (TextView) v.findViewById(R.id.wrkrstate);
+        district = (TextView) v.findViewById(R.id.wrkrdistrict);
+        city = (TextView) v.findViewById(R.id.wrkrkcity);
+
+        pd = new ProgressDialog(getActivity());
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+        ref = db.getReference(auth.getCurrentUser().getUid()).child("Service Provider").child("Profile");
+        pd.show();
+        pd.setMessage("Wait");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                name.setText(snapshot.child("Name").getValue().toString());
+                email.setText(snapshot.child("Email").getValue().toString());
+                mobile.setText(snapshot.child("Phone").getValue().toString());
+                aadhar.setText(snapshot.child("Aadhar").getValue().toString());
+                pincode.setText(snapshot.child("PinCode").getValue().toString());
+                dob.setText(snapshot.child("DOB").getValue().toString());
+                state.setText(snapshot.child("State").getValue().toString());
+                district.setText(snapshot.child("District").getValue().toString());
+                city.setText(snapshot.child("City").getValue().toString());
+                pd.dismiss();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return v;
     }
 }
