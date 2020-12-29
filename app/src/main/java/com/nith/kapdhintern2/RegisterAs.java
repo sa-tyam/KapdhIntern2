@@ -11,7 +11,7 @@ import android.widget.Toast;
 public class RegisterAs extends AppCompatActivity {
 
     Button cust,sp;
-    String email,phone,aadhar,name,dob,pin,state,district,city;
+    String email,phone,aadhar,name,dob,pin,state,district,city,nation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +27,7 @@ public class RegisterAs extends AppCompatActivity {
         state = getIntent().getStringExtra("state");
         district = getIntent().getStringExtra("district");
         city = getIntent().getStringExtra("city");
+        nation = getIntent().getStringExtra("nationality");
 
         Toast.makeText(this,email,Toast.LENGTH_SHORT).show();
         Toast.makeText(this,phone,Toast.LENGTH_SHORT).show();
@@ -42,6 +43,7 @@ public class RegisterAs extends AppCompatActivity {
                 intent.putExtra("dob",dob);
                 intent.putExtra("pincode",pin);
                 intent.putExtra("state",state);
+                intent.putExtra("nationality",nation);
                 intent.putExtra("district",district);
                 intent.putExtra("city",city);
                 startActivity(intent);
@@ -58,6 +60,7 @@ public class RegisterAs extends AppCompatActivity {
                 intent.putExtra("dob",dob);
                 intent.putExtra("pincode",pin);
                 intent.putExtra("state",state);
+                intent.putExtra("nationality",nation);
                 intent.putExtra("district",district);
                 intent.putExtra("city",city);
                 startActivity(intent);

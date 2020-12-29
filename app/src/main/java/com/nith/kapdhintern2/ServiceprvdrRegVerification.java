@@ -39,13 +39,14 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
     private static final int PICK_DOC1 = 1 ;
     private static final int PICK_DOC2 = 2;
     private static final int PICK_DOC3 = 3;
-    String email,phone,aadhar,name,dob,pin,state,district,city;
+    String email,phone,aadhar,name,dob,pin,state,district,city,nation;
     Button done,cancel;
     TextView t1,doc1,doc2,doc3;
     ImageView iv1,iv2,add1,add2,add3;
     EditText phoneOtp;
     TextView resendOtp;
     Boolean otpvalid = true;
+    Boolean isPhoneVerified = false;
     String verificationid;
     Uri uri1,uri2,uri3;
     String fileurl;
@@ -87,6 +88,7 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
         state = getIntent().getStringExtra("state");
         district = getIntent().getStringExtra("district");
         city = getIntent().getStringExtra("city");
+        nation = getIntent().getStringExtra("nationality");
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
@@ -165,50 +167,10 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 user.reload();
                 user = auth.getCurrentUser();
                 Boolean emailflag = user.isEmailVerified();
-                if(emailflag)
-                {
-                    t1.setVisibility(View.VISIBLE);
-                    iv1.setVisibility(View.VISIBLE);
-                    t1.setText("Verified");
-                    iv1.setImageResource(R.drawable.tick);
-                    Toast.makeText(getApplicationContext(),"Email Verified",Toast.LENGTH_SHORT).show();
-                    validateotp(phoneOtp.getText().toString());
-
-                    if(doc1.getText().toString().isEmpty())
-                    {
-                        Toast.makeText(getApplicationContext(),"Doc required",Toast.LENGTH_SHORT).show();
-                    }
-                    else if(doc2.getText().toString().isEmpty())
-                    {
-                        Toast.makeText(getApplicationContext(),"Doc required",Toast.LENGTH_SHORT).show();
-                    }
-                    else if(doc3.getText().toString().isEmpty())
-                    {
-                        Toast.makeText(getApplicationContext(),"Doc required",Toast.LENGTH_SHORT).show();
-                    }
-                    else if(otpvalid)
-                    {
-                        String otp = phoneOtp.getText().toString().trim();
-
-                        PhoneAuthCredential credential =  PhoneAuthProvider.getCredential(verificationid,otp);
-                        Toast.makeText(getApplicationContext(),verificationid+"and"+otp,Toast.LENGTH_SHORT).show();
-                        verifyAuthCredential(credential);
-                    }
-                }
-                else
-                {
-                    t1.setVisibility(View.VISIBLE);
-                    iv1.setVisibility(View.VISIBLE);
-                    t1.setText("Not Verified");
-                    iv1.setImageResource(R.drawable.cross);
-                    Toast.makeText(getApplicationContext(),"Email Not Verified",Toast.LENGTH_SHORT).show();
-                }
-
-
+                isAllOk(emailflag,isPhoneVerified);
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +179,82 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
                 startActivity(new Intent(ServiceprvdrRegVerification.this,MainActivity.class));
             }
         });
+    }
+
+    private void isAllOk(Boolean emailflag, Boolean isPhoneVerified) {
+
+        if(emailflag && isPhoneVerified)
+        {
+            if(doc1.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Doc required",Toast.LENGTH_SHORT).show();
+            }
+            else if(doc2.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Doc required",Toast.LENGTH_SHORT).show();
+            }
+            else if(doc3.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Doc required",Toast.LENGTH_SHORT).show();
+            }
+            else
+                {
+                    ref = db.getReference(user.getUid()).child("Service Provider").child("Profile");
+                    ref.child("Email").setValue(email);
+                    ref.child("Phone").setValue(phone);
+                    ref.child("Aadhar").setValue(aadhar);
+                    ref.child("Name").setValue(name);
+                    ref.child("PinCode").setValue(pin);
+                    ref.child("DOB").setValue(dob);
+                    ref.child("State").setValue(state);
+                    ref.child("District").setValue(district);
+                    ref.child("City").setValue(city);
+                    ref.child("Nationality").setValue(nation);
+                    Uploadfile(uri1);
+                    Uploadfile(uri2);
+                    Uploadfile(uri3);
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                }
+
+        }
+        else if(emailflag && !(isPhoneVerified))
+        {
+            t1.setVisibility(View.VISIBLE);
+            iv1.setVisibility(View.VISIBLE);
+            t1.setText("Verified");
+            iv1.setImageResource(R.drawable.tick);
+            Toast.makeText(getApplicationContext(),"Email Verified",Toast.LENGTH_SHORT).show();
+            validateotp(phoneOtp.getText().toString());
+
+            if(doc1.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Doc required",Toast.LENGTH_SHORT).show();
+            }
+            else if(doc2.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Doc required",Toast.LENGTH_SHORT).show();
+            }
+            else if(doc3.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Doc required",Toast.LENGTH_SHORT).show();
+            }
+            else if(otpvalid)
+            {
+                String otp = phoneOtp.getText().toString().trim();
+
+                PhoneAuthCredential credential =  PhoneAuthProvider.getCredential(verificationid,otp);
+                Toast.makeText(getApplicationContext(),verificationid+"and"+otp,Toast.LENGTH_SHORT).show();
+                verifyAuthCredential(credential);
+            }
+        }
+        else
+        {
+            t1.setVisibility(View.VISIBLE);
+            iv1.setVisibility(View.VISIBLE);
+            t1.setText("Not Verified");
+            iv1.setImageResource(R.drawable.cross);
+            Toast.makeText(getApplicationContext(),"Email Not Verified",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -256,7 +294,7 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
                     Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
                     while(!uri.isComplete());
                     Uri url = uri.getResult();
-                    DatabaseReference reference = db.getReference(user.getUid()).child("Service Provider").child("Info");
+                    DatabaseReference reference = db.getReference(user.getUid()).child("Service Provider").child("Profile");
                     reference.child("Doc1").setValue(url.toString());
                     pd.dismiss();
                 }
@@ -282,7 +320,7 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
                     Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
                     while(!uri.isComplete());
                     Uri url = uri.getResult();
-                    DatabaseReference reference = db.getReference(user.getUid()).child("Service Provider").child("Info");
+                    DatabaseReference reference = db.getReference(user.getUid()).child("Service Provider").child("Profile");
                     reference.child("Doc2").setValue(url.toString());
                     pd.dismiss();
                 }
@@ -308,7 +346,7 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
                     Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
                     while(!uri.isComplete());
                     Uri url = uri.getResult();
-                    DatabaseReference reference = db.getReference(user.getUid()).child("Service Provider").child("Info");
+                    DatabaseReference reference = db.getReference(user.getUid()).child("Service Provider").child("Profile");
                     reference.child("Doc3").setValue(url.toString());
                     pd.dismiss();
                 }
@@ -362,22 +400,11 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Linked",Toast.LENGTH_SHORT).show();
                 iv2.setVisibility(View.VISIBLE);
                 iv2.setImageResource(R.drawable.tick);
-
-                ref = db.getReference(user.getUid()).child("Service Provider").child("Info");
-                ref.child("Email").setValue(email);
-                ref.child("Phone").setValue(phone);
-                ref.child("Aadhar").setValue(aadhar);
-                ref.child("Name").setValue(name);
-                ref.child("PinCode").setValue(pin);
-                ref.child("DOB").setValue(dob);
-                ref.child("State").setValue(state);
-                ref.child("District").setValue(district);
-                ref.child("City").setValue(city);
-                Uploadfile(uri1);
-                Uploadfile(uri2);
-                Uploadfile(uri3);
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-
+                isPhoneVerified = true;
+                user.reload();
+                user = auth.getCurrentUser();
+                Boolean emailflag = user.isEmailVerified();
+                isAllOk(emailflag,isPhoneVerified);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

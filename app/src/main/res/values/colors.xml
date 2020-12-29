@@ -11,4 +11,8 @@
     <color name="bottombarBackgroundTint">#FFFFFF</color>
     <color name="bottombarItemTint">#E91E63</color>
     <color name="bottombarItemTextColor">#F44336</color>
+    <color name="workerHistoryHeaderTextColor">#DC362A</color>
+    <color name="workerHistoryHeaderBackgroundColor">#FFFFFF</color>
+    <color name="workerHistoryItemDetailHeaderBackgroundColor">#DC362A</color>
+    <color name="workerHistoryItemDetailHeaderTextColor">#FFFFFF</color>
 </resources>

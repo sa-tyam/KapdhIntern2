@@ -1,5 +1,7 @@
 package com.nith.kapdhintern2;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -31,11 +33,19 @@ import com.google.firebase.database.ValueEventListener;
 public class FragmentLogin extends Fragment {
 
 
+    public Context mcontext;
     FirebaseDatabase db;
     FirebaseAuth auth;
     View v;
     EditText email,password;
     Button login;
+    ProgressDialog pd;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mcontext = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,8 +56,10 @@ public class FragmentLogin extends Fragment {
         password = (EditText) v.findViewById(R.id.login_password);
         login = (Button) v.findViewById(R.id.login_go);
 
+        pd = new ProgressDialog(getActivity());
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +74,8 @@ public class FragmentLogin extends Fragment {
                }
                else
                    {
+                       pd.show();
+                       pd.setMessage("Wait!");
                        auth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                            @Override
                            public void onComplete(@NonNull Task<AuthResult> task) {
@@ -73,22 +87,25 @@ public class FragmentLogin extends Fragment {
                                        @Override
                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                           if(snapshot.exists())
+                                           if(snapshot.exists() & auth.getCurrentUser().isEmailVerified())
                                            {
-
+                                               pd.dismiss();
                                                if(snapshot.hasChild("Customer"))
                                                {
-                                                   startActivity(new Intent(getActivity(),CustomerPage.class));
+                                                   startActivity(new Intent(mcontext,CustomerPage.class));
+                                                   getActivity().finish();
                                                }
                                                if(snapshot.hasChild("Service Provider"))
                                                {
-                                                   startActivity(new Intent(getActivity(),LoginAs.class));
+                                                   startActivity(new Intent(mcontext,LoginAs.class));
+                                                   getActivity().finish();
                                                }
 
 
                                            }
                                            else
                                            {
+                                               pd.dismiss();
                                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                                user.delete();
                                                Toast.makeText(getActivity(),"Complete your verification first",Toast.LENGTH_SHORT).show();
@@ -103,6 +120,7 @@ public class FragmentLogin extends Fragment {
                                }
                                else
                                {
+                                   pd.dismiss();
                                    Toast.makeText(getActivity(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                                }
                            }
