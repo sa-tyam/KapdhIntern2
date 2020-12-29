@@ -39,7 +39,7 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
     private static final int PICK_DOC1 = 1 ;
     private static final int PICK_DOC2 = 2;
     private static final int PICK_DOC3 = 3;
-    String email,phone,aadhar,name,dob,pin,state,district,city;
+    String email,phone,aadhar,name,dob,pin,state,district,city,nation;
     Button done,cancel;
     TextView t1,doc1,doc2,doc3;
     ImageView iv1,iv2,add1,add2,add3;
@@ -88,6 +88,7 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
         state = getIntent().getStringExtra("state");
         district = getIntent().getStringExtra("district");
         city = getIntent().getStringExtra("city");
+        nation = getIntent().getStringExtra("nationality");
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
@@ -208,6 +209,7 @@ public class ServiceprvdrRegVerification extends AppCompatActivity {
                     ref.child("State").setValue(state);
                     ref.child("District").setValue(district);
                     ref.child("City").setValue(city);
+                    ref.child("Nationality").setValue(nation);
                     Uploadfile(uri1);
                     Uploadfile(uri2);
                     Uploadfile(uri3);

@@ -1,6 +1,7 @@
 package com.nith.kapdhintern2;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -32,12 +33,19 @@ import com.google.firebase.database.ValueEventListener;
 public class FragmentLogin extends Fragment {
 
 
+    public Context mcontext;
     FirebaseDatabase db;
     FirebaseAuth auth;
     View v;
     EditText email,password;
     Button login;
     ProgressDialog pd;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mcontext = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,11 +92,13 @@ public class FragmentLogin extends Fragment {
                                                pd.dismiss();
                                                if(snapshot.hasChild("Customer"))
                                                {
-                                                   startActivity(new Intent(getActivity(),CustomerPage.class));
+                                                   startActivity(new Intent(mcontext,CustomerPage.class));
+                                                   getActivity().finish();
                                                }
                                                if(snapshot.hasChild("Service Provider"))
                                                {
-                                                   startActivity(new Intent(getActivity(),LoginAs.class));
+                                                   startActivity(new Intent(mcontext,LoginAs.class));
+                                                   getActivity().finish();
                                                }
 
 

@@ -1,36 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
-    tools:context=".FragmentRegister">
+    tools:context=".EditProfile">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/purple_700"
+            app:title="Edit Profile"
+            app:titleTextColor="@color/white"
+            android:id="@+id/toolbar"/>
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginLeft="110dp"
-            android:layout_marginTop="50dp"
             android:layout_marginRight="110dp"
-            android:background="@color/black">
+            android:layout_marginTop="50dp"
+            app:cardCornerRadius="30dp">
 
-        </ImageView>
+            <ImageView
+                android:id="@+id/profilepic"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/black">
+
+            </ImageView>
+        </androidx.cardview.widget.CardView>
+
 
         <EditText
-            android:id="@+id/reg_name"
+            android:id="@+id/edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:hint="Name"
             android:textColorHint="@color/grey">
 
@@ -38,34 +53,37 @@
 
 
         <EditText
-            android:id="@+id/reg_email"
+            android:id="@+id/edit_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:hint="Email ID"
             android:textColorHint="@color/grey">
 
         </EditText>
         <EditText
-            android:id="@+id/reg_mobile"
+            android:id="@+id/edit_mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:hint="Mobile No."
             android:textColorHint="@color/grey">
 
         </EditText>
         <EditText
-            android:id="@+id/reg_aadhar"
+            android:id="@+id/edit_aadhar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:hint="Aadhar Number"
             android:textColorHint="@color/grey">
 
@@ -82,10 +100,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/reg_dob"
+                android:id="@+id/edit_dob"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -96,7 +115,7 @@
             </EditText>
 
             <ImageView
-                android:id="@+id/calendr"
+                android:id="@+id/calendr2"
                 android:layout_width="35dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/calender2"
@@ -104,7 +123,7 @@
 
             </ImageView>
             <EditText
-                android:id="@+id/reg_pincode"
+                android:id="@+id/edit_pincode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -120,10 +139,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/reg_state"
+                android:id="@+id/edit_state"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -135,7 +155,7 @@
             </EditText>
 
             <EditText
-                android:id="@+id/reg_nationality"
+                android:id="@+id/edit_nationality"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -151,11 +171,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/reg_district"
+                android:id="@+id/edit_district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -167,7 +188,7 @@
             </EditText>
 
             <EditText
-                android:id="@+id/reg_city"
+                android:id="@+id/edit_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -180,35 +201,13 @@
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/reg_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:hint="Create Password"
-            android:textColorHint="@color/grey">
-
-        </EditText>
-        <EditText
-            android:id="@+id/reg_retypepass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:hint="Retype Password"
-            android:textColorHint="@color/grey">
-
-        </EditText>
 
         <Button
-            android:id="@+id/go_reg"
+            android:id="@+id/go_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             android:text="Go"
             android:textSize="18sp"
@@ -222,5 +221,4 @@
         </Button>
 
     </LinearLayout>
-
-</androidx.core.widget.NestedScrollView>
+</ScrollView>

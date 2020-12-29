@@ -23,12 +23,14 @@ public class LoginAs extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginAs.this,CustomerPage.class));
+                finish();
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginAs.this,WorkerPage.class));
+                finish();
             }
         });
     }

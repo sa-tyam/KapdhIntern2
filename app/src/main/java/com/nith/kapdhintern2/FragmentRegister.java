@@ -53,7 +53,7 @@ public class FragmentRegister extends Fragment {
          state = (EditText) v.findViewById(R.id.reg_state);
          mobile = (EditText) v.findViewById(R.id.reg_mobile);
          aadhar = (EditText) v.findViewById(R.id.reg_aadhar);
-         nation = (EditText) v.findViewById(R.id.reg_indian);
+         nation = (EditText) v.findViewById(R.id.reg_nationality);
          pin = (EditText) v.findViewById(R.id.reg_pincode);
          city = (EditText) v.findViewById(R.id.reg_city);
          distrct = (EditText) v.findViewById(R.id.reg_district);
@@ -85,6 +85,7 @@ public class FragmentRegister extends Fragment {
                  String mpin = pin.getText().toString().trim();
                  String mcity = city.getText().toString().trim();
                  String mdistrict = distrct.getText().toString().trim();
+                 String mnationality = nation.getText().toString().trim();
 
                  if(TextUtils.isEmpty(mname))
                  {
@@ -120,6 +121,11 @@ public class FragmentRegister extends Fragment {
                  if(TextUtils.isEmpty(mstate))
                  {
                      state.setError("Required Field");
+                     return;
+                 }
+                 if(TextUtils.isEmpty(mnationality))
+                 {
+                     nation.setError("Required Field");
                      return;
                  }
                  if(TextUtils.isEmpty(mdistrict))
@@ -166,6 +172,7 @@ public class FragmentRegister extends Fragment {
                              intent.putExtra("dob",mdob);
                              intent.putExtra("pincode",mpin);
                              intent.putExtra("state",mstate);
+                             intent.putExtra("nationality",mnationality);
                              intent.putExtra("district",mdistrict);
                              intent.putExtra("city",mcity);
                              startActivity(intent);

@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CustomerRegVerification extends AppCompatActivity {
 
-    String email,phone,aadhar,name,dob,pin,state,district,city;
+    String email,phone,aadhar,name,dob,pin,state,district,city,nation;
     Button done,cancel;
     TextView t1;
     ImageView iv1,iv2;
@@ -68,6 +68,7 @@ public class CustomerRegVerification extends AppCompatActivity {
         state = getIntent().getStringExtra("state");
         district = getIntent().getStringExtra("district");
         city = getIntent().getStringExtra("city");
+        nation = getIntent().getStringExtra("nationality");
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
@@ -152,6 +153,7 @@ public class CustomerRegVerification extends AppCompatActivity {
             ref.child("State").setValue(state);
             ref.child("District").setValue(district);
             ref.child("City").setValue(city);
+            ref.child("Nationality").setValue(nation);
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
         else if(emailflag && !(isPhoneVerifed))
