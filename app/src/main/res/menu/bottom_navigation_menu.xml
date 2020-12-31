@@ -6,19 +6,12 @@
         android:title="History"
         android:icon="@drawable/ic_baseline_history_24"/>
     <item
-        android:id="@+id/bottombar_available_jobs"
-        android:title="Availaible job"
-        android:icon="@drawable/ic_baseline_add_box_24"/>
+        android:id="@+id/bottombar_home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
     <item
         android:id="@+id/bottombar_profile"
         android:title="Profile"
         android:icon="@drawable/ic_baseline_account_box_24"/>
-    <item
-        android:id="@+id/bottombar_current_transactions"
-        android:title="Current Transaction"
-        android:icon="@drawable/ic_baseline_attach_money_24"/>
-    <item
-        android:id="@+id/bottombar_account"
-        android:title="Account"
-        android:icon="@drawable/ic_baseline_account_box_24"/>
+
 </menu>

@@ -8,6 +8,31 @@
     android:layout_height="match_parent"
     tools:context=".WorkerPage">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        app:layout_constraintBottom_toTopOf="@+id/worker_fragment_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/workerHEaderTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/worker_page_header"
+            android:textColor="@color/text_on_primary"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <FrameLayout
         android:id="@+id/worker_fragment_container"
         android:layout_width="match_parent"
@@ -15,7 +40,8 @@
         app:layout_constraintBottom_toTopOf="@+id/worker_bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        android:background="@color/primary_light">
 
     </FrameLayout>
 
@@ -23,9 +49,9 @@
         android:id="@+id/worker_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:backgroundTint="@color/bottombarBackgroundTint"
-        app:itemIconTint="@color/bottombarItemTint"
-        app:itemTextColor="@color/bottombarItemTextColor"
+        app:backgroundTint="@color/primary"
+        app:itemIconTint="@color/text_on_primary"
+        app:itemTextColor="@color/text_on_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

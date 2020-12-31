@@ -12,7 +12,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/white"
+        android:background="@color/secondary_light"
+        app:cardCornerRadius="10dp"
+        android:elevation="10dp"
+        app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +24,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="@color/secondary_light"
             android:padding="20dp">
 
             <TextView
@@ -30,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="Order #45678"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_on_primary"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="$450"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_on_primary"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="2 days"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_on_primary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemOrderIdTextView" />
 
@@ -64,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="today, 08:10 AM"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_on_primary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemOrderIdTextView" />
 
@@ -73,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/black"
+                android:background="@color/text_on_primary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/workerHistoryItemDateTextView" />
@@ -83,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ratings"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_on_primary"
                 app:layout_constraintBottom_toBottomOf="@+id/workerHistoryItemDetailButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/workerHistoryItemDetailButton" />
@@ -94,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="4/5"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_on_primary"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/workerHistoryItemDetailButton"
                 app:layout_constraintStart_toEndOf="@+id/workerHistoryItemratingLableTextView"
@@ -107,7 +110,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@android:color/transparent"
                 android:text="@string/historyItemDetailsButton"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_on_primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />

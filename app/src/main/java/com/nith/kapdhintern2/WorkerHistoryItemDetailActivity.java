@@ -3,6 +3,7 @@ package com.nith.kapdhintern2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ public class WorkerHistoryItemDetailActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     Long orderId;
     String uid;
+    ProgressDialog pd;
 
     // views used
     TextView workerHistoryItemDetailOrderIdTextView;
@@ -64,6 +66,9 @@ public class WorkerHistoryItemDetailActivity extends AppCompatActivity {
         initViews();
         orderId = getIntent().getLongExtra("orderNumber", -1);
         uid = FirebaseAuth.getInstance().getUid();
+        pd = new ProgressDialog(getApplicationContext());
+        pd.show();
+        pd.setMessage("Wait");
         getDataFromDatabase();
     }
 
@@ -113,6 +118,9 @@ public class WorkerHistoryItemDetailActivity extends AppCompatActivity {
     }
 
     public void setDataInViews () {
+        if(pd.isShowing()) {
+            pd.cancel();
+        }
         workerHistoryItemDetailOrderIdTextView.setText("#" + String.valueOf(orderId));
         workerHistoryItemDetailTimeTextView.setText(orderTime);
         workerHistoryItemDetailTotalDaysTextView.setText(String.valueOf(daysCount) + " days");

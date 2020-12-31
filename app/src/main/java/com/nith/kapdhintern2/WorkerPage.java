@@ -39,20 +39,12 @@ public class WorkerPage extends AppCompatActivity {
                         selectedFragment = new WorkerHistoryFragment();
                         break;
 
-                    case R.id.bottombar_available_jobs:
-                        selectedFragment = new WorkerAvailableJobsFragment();
+                    case R.id.bottombar_home:
+                        selectedFragment = new WorkerHomeFragment();
                         break;
 
                     case R.id.bottombar_profile:
                         selectedFragment = new WorkerProfileFragment();
-                        break;
-
-                    case R.id.bottombar_current_transactions:
-                        selectedFragment = new WorkerCurrentTransactionsFragment();
-                        break;
-
-                    case R.id.bottombar_account:
-                        selectedFragment = new WorkerAccountFragment();
                         break;
 
                 }

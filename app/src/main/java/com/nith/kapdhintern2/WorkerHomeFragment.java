@@ -7,13 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link WorkerCurrentTransactionsFragment#newInstance} factory method to
+ * Use the {@link WorkerHomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WorkerCurrentTransactionsFragment extends Fragment {
+public class WorkerHomeFragment extends Fragment {
+
+    SearchView workerAvailableJobSearchView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +27,7 @@ public class WorkerCurrentTransactionsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public WorkerCurrentTransactionsFragment() {
+    public WorkerHomeFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +37,11 @@ public class WorkerCurrentTransactionsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment WorkerCategoryFragment.
+     * @return A new instance of fragment WorkerOrdersFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WorkerCurrentTransactionsFragment newInstance(String param1, String param2) {
-        WorkerCurrentTransactionsFragment fragment = new WorkerCurrentTransactionsFragment();
+    public static WorkerHomeFragment newInstance(String param1, String param2) {
+        WorkerHomeFragment fragment = new WorkerHomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +62,27 @@ public class WorkerCurrentTransactionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_worker_current_transactions, container, false);
+        View view = inflater.inflate(R.layout.fragment_worker_home, container, false);
+
+        workerAvailableJobSearchView = view.findViewById(R.id.workerAvailableJobSearchView);
+        workerAvailableJobSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                searchResult(s);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                searchResult(s);
+                return true;
+            }
+        });
+
+        return view;
+    }
+
+    private void searchResult ( String s) {
+
     }
 }

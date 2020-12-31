@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="primary">#6200ea</color>
+    <color name="primary_dark">#0a00b6</color>
+    <color name="primary_light">#9d46ff</color>
+    <color name="secondary">#e91e63</color>
+    <color name="secondary_light">#ff6090</color>
+    <color name="secondary_dark">#b0003a</color>
+    <color name="text_on_primary">#e3f2fd</color>
+    <color name="Text_on_secondary">#000000</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

@@ -1,5 +1,6 @@
 package com.nith.kapdhintern2;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,7 @@ public class WorkerHistoryFragment extends Fragment {
 
     static RecyclerView workerHistoryRecyclerView;
     static WorkerHistoryAdapter workerHistoryAdapter;
+    ProgressDialog pd;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,13 +72,18 @@ public class WorkerHistoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_worker_history, container, false);
         workerHistoryRecyclerView = view.findViewById(R.id.workerHistoryRecyclerView);
+        pd = new ProgressDialog(getActivity());
+        pd.show();
+        pd.setMessage("Wait");
         callRetrieveData();
-
         return view;
     }
 
     // setting up recycler view
     public void setWorkerHistoryRecyclerView() {
+        if (pd.isShowing()) {
+            pd.cancel();
+        }
         workerHistoryRecyclerView.setHasFixedSize(true);
         workerHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         workerHistoryAdapter = new WorkerHistoryAdapter (getContext(), workerHistoryItemArrayList);

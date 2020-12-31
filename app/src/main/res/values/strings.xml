@@ -2,6 +2,7 @@
     <string name="app_name">KapdhIntern2</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="worker_page_header">Kapadh</string>
     <string name="worker_history_header">History</string>
     <string name="historyItemDetailsButton">Details</string>
     <string name="workerHistoryItemDetailHeader">Order Details</string>
@@ -14,4 +15,6 @@
     <string name="workerHistoryItemDetailCustomerPincodeHint">Pin Code</string>
     <string name="workerHistoryItemDetailCustomerRatingHint">Ratings</string>
     <string name="workerHistoryItemDetailCustomerReviewHint">Review</string>
+    <string name="workerProfileRatingLabel">Rating</string>
+    <string name="workerProfileJobsDoneLabel">jobs done</string>
 </resources>

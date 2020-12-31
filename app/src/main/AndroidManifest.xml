@@ -27,7 +27,9 @@
         <activity android:name=".CustomerRegVerification" />
         <activity android:name=".RegisterAs" />
         <activity android:name=".MainActivity2" />
-        <activity android:name=".WorkerPage" />
+        <activity android:name=".WorkerPage">
+
+        </activity>
     </application>
 
 </manifest>

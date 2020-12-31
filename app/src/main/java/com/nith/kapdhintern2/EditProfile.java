@@ -52,7 +52,8 @@ public class EditProfile extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
 
-        DatabaseReference ref = db.getReference(auth.getUid()).child("Service Provider").child("Profile");
+        String uid = auth.getUid();
+        DatabaseReference ref = db.getReference(uid).child("Service Provider").child("Profile");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
